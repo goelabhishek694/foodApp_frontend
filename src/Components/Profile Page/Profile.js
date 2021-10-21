@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect,useContext} from 'react';
 import '../Styles/profile.css';
 import { useAuth } from '../Context/AuthProvider';
 import axios from 'axios';
 
 function Profile() {
-    const { user } = useAuth();
-    const [password, passwordSet] = useState(user.user.password)
-    const [passwordCnf, passwordCnfSet] = useState(user.user.password)
-    const [email, emailSet] = useState(user.user.email);
-    const [name, nameSet] = useState(user.user.name);
+
+    // const { user } = useAuth();
+    const [user,setUser] = useState()
+    useEffect(async ()=>{
+        setUser(JSON.parse(localStorage.getItem("user")));
+        console.log(user);
+        nameSet(user.data.name)
+        passwordSet(user.data.password)
+        emailSet(user.data.email)
+        passwordCnfSet(user.data.password)
+        console.log(user)
+    },[]);
+    // console.log("typeof user is ",(user));
+    const [password, passwordSet] = useState()
+    const [passwordCnf, passwordCnfSet] = useState("")
+    const [email, emailSet] = useState("");
+    const [name, nameSet] = useState("");
     const nameEdit = async () => {
-        await axios.patch('/api/users/login');
+        await axios.patch('/user/login');
     }
     const handleClick = async () => {
         try {
             console.log(user.user._id);
-            const data = await axios.patch("/api/users/" + user.user._id, { headers: { "Authorization": `Bearer ${user.token}` } }, {
+            const data = await axios.patch("/user/" + user.user._id, { headers: { "Authorization": `Bearer ${user.token}` } }, {
                email,
                 name,
                 password,
@@ -30,13 +42,12 @@ function Profile() {
     console.log(user);
     return (
         <div className="container-grey">
-
             <div className="form-container">
                 <div className='h1Box'>
-                    <h1 className='h1'>Profile</h1>\
+                    <h1 className='h1'>Profile</h1>
                     <div className="line"></div>
                     <div className="profileImage">
-                        <img src={user.user.profileImage} />
+                        {/* <img src={user.user.profileImage} /> */}
                     </div>
                 </div>
                 <div className="loginBox">

@@ -12,13 +12,15 @@ function PlanDetail() {
     const [review, setreview] = useState("");
     const [rate, setrate] = useState();
     const { user } = useAuth();
+    console.log(id);
     useEffect(async () => {
-        const data = await axios.get(`/api/plans/${id}`)
-        console.log(data.data.data);
+        console.log("inside useeffect");
+        const data = await axios.get("/plans/plan/"+id)
+        console.log(data,565785765);
         delete data.data.data["_id"]
         delete data.data.data["__v"]
         setplan(data.data.data)
-        const reviews = await axios.get("/api/getReview/" + id);
+        const reviews = await axios.get(`/review/${id}/`);
         setarr(reviews.data.reviews)
         console.log(arr);
     }, [])
@@ -27,15 +29,18 @@ function PlanDetail() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
     console.log(rate);
+    // console.log("user ",user);
     const handleClick = async () => {
         console.log(123645);
-        const data = await axios.post("/api/reviews", {
+        const data = await axios.post("/review/crud/"+id, {
             "review": review,
             "rating": rate,
-            "user": user.user._id,
+            "user": user.data._id,
             "plan": id
         })
-        const reviews = await axios.get("/api/getReview/" + id);
+        console.log(data);
+        const reviews = await axios.get("/review/" + id);
+        console.log(reviews);
         setarr(reviews.data.reviews);
     }
     const handleDelete = async() =>{
@@ -76,7 +81,7 @@ function PlanDetail() {
                 <div className="reviewEnrty">
                     <input type="text" value={review} onChange={(e) => setreview(e.target.value)} />
                     <select name="" id="" className="select" onChange={(e) => { setrate(e.target.value) }}>
-                        <option value="5">5 Exellent</option>
+                        <option value="5">5 Excellent</option>
                         <option value="4">4 Very Good</option>
                         <option value="3">3 Good</option>
                         <option value="2">2 Poor</option>

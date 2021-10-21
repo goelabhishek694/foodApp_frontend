@@ -7,6 +7,7 @@ import NavBar from './Components/Home Page/NavBar';
 import Footer from './Components/Home Page/Footer';
 import Login from './Components/Login Page/Login';
 import ForgetPassword from './Components/Login Page/ForgetPassword';
+import ResetPassword from './Components/Login Page/ResetPassword';
 import AllPlans from './Components/Plan Page/AllPlans';
 import AuthProvider from './Components/Context/AuthProvider';
 import Profile from './Components/Profile Page/Profile';
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/forgetPassword">
             <ForgetPassword />
+          </Route>
+          <Route path="/resetpassword">
+            <ResetPassword />
           </Route>
           <Route path="/allPlans">
             <AllPlans />

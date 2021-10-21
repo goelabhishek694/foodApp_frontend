@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import '../Styles/login.css'
 
-function Login() {
+function 
+Login() {
 
     const history = useHistory();
     const [password, passwordSet] = useState("")
@@ -17,7 +18,7 @@ function Login() {
         try {
             // console.log(email,password)
             await login(email, password)
-            history.push("/")
+            // history.push("/")
           } catch(err) {
             console.log(err);
           }

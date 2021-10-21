@@ -46,7 +46,7 @@ function AuthProvider({ children }) {
 
     useEffect(async () => {
         let data = localStorage.getItem("user");
-        // console.log(data);
+        console.log(data,898787);
         if (data) {
             userSet(JSON.parse(data));
             history.push("/");

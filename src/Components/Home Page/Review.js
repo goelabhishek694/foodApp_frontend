@@ -10,7 +10,7 @@ function Review() {
         try {
             const data = await axios.get("/review/top3");
             setarr(data.data.reviews);
-            console.log(data.data.length);
+            // console.log(data.data.length);
         } catch (err) {
             console.log(err);
         }
