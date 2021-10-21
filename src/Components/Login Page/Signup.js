@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
+import { AuthContext } from '../Context/AuthProvider';
 import axios from 'axios';
 import '../Styles/login.css';
 import { useHistory } from 'react-router-dom';
@@ -9,15 +10,11 @@ function Signup(props) {
     const [password, passwordSet] = useState("");
     const [email, emailSet] = useState("");
     const [confirm, setConfirm] = useState("");
+    const {signUp, user} = useContext(AuthContext);
 
     const handleSignup = async () => {
         try {
-            const data = await axios.post("/api/users/signup", {
-                name: name,
-                email: email,
-                password: password,
-                confirmPassword: confirm
-            });
+            await signUp(name,email,password,confirm);
             history.push("/login");
         }
         catch (err) {

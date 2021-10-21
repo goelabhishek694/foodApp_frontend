@@ -9,7 +9,7 @@ function Plans() {
 
     useEffect(async () => {
         try {
-            const data = await axios.get("/api/gettop3");
+            const data = await axios.get("/plans/top3");
             arrset(data.data.data);
             console.log(data.data);
         } catch (err) {

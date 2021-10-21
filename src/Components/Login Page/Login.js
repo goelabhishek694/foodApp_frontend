@@ -13,8 +13,6 @@ function Login() {
     const [loading, setLoading] = useState(false);
     const {login, user} = useContext(AuthContext);
 
-
-
     const handleLogin = async () => {
         try {
             // console.log(email,password)

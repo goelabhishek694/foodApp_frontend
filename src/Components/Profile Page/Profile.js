@@ -16,7 +16,7 @@ function Profile() {
         try {
             console.log(user.user._id);
             const data = await axios.patch("/api/users/" + user.user._id, { headers: { "Authorization": `Bearer ${user.token}` } }, {
-                email,
+               email,
                 name,
                 password,
                 confirmPassword: passwordCnf,

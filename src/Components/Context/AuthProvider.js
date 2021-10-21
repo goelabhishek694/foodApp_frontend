@@ -12,15 +12,23 @@ function AuthProvider({ children }) {
     const [user, userSet] = useState("");
     const [loading, setLoading] = useState(false);
 
-    function signUp(user) {
+    async function signUp(name,email,password,confirmPassword) {
+        const data = await axios.post("/user/signup", {
+            name:name,
+            email: email,
+            password: password,
+            confirmPassword:confirmPassword
+        });
+        console.log(data,user);
         userSet(user);
     }
     async function login(email, password) {
         try {
-            const data = await axios.post("/api/users/login", {
+            const data = await axios.post("/user/login", {
                 email: email,
                 password: password
             });
+            console.log("dataaa",data.data);
             userSet(data.data);
             localStorage.setItem("user", JSON.stringify(data.data));
             return data;
@@ -29,8 +37,10 @@ function AuthProvider({ children }) {
             console.log(err);
         }
     }
-    function logout() {
+    async function logout() {
         localStorage.removeItem("user")
+        const data = await axios.get("/user/logout");
+        console.log(data);
         userSet(null);
     }
 
@@ -51,6 +61,7 @@ function AuthProvider({ children }) {
         signUp,
         logout
     }
+
     return (
         < AuthContext.Provider value={value} >
             {!loading && children}

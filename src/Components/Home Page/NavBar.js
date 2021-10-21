@@ -27,9 +27,11 @@ function NavBar() {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/allPlans">Plans</Link></li>
                     {user ?
+                    
                         <>
+                        {console.log(user)}
                             <li>
-                                <Link to="/profilePage">{user?.user?.name}</Link>
+                                <Link to="/profilePage">{user?.data?.name}</Link>
                             </li>
                             <li>
                                 <Link to="" onClick={logout}>Logout</Link>
