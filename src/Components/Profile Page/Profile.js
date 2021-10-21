@@ -26,14 +26,14 @@ function Profile() {
     }
     const handleClick = async () => {
         try {
-            console.log(user.user._id);
-            const data = await axios.patch("/user/" + user.user._id, { headers: { "Authorization": `Bearer ${user.token}` } }, {
+            console.log(user.data._id);
+            const data = await axios.patch("/user/" + user.data._id, {
                email,
                 name,
                 password,
                 confirmPassword: passwordCnf,
-                role: user.user.role,
-                _id:user.user._id
+                role: user.data.role,
+                _id:user.data._id
             });
         } catch (error) {
             console.log(error);
