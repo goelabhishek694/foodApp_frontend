@@ -49,6 +49,7 @@ function AuthProvider({ children }) {
         console.log(data,898787);
         if (data) {
             userSet(JSON.parse(data));
+            console.log(user);
             history.push("/");
         } else {
             userSet(null);

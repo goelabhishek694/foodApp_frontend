@@ -42,20 +42,19 @@ function PlanDetail() {
         })
         console.log(data);
         const reviews = await axios.get("/review/" + id);
-        console.log(reviews);
-        setarr(reviews.data.reviews);
+        // console.log(reviews);
+        setarr(reviews.data.data);
     }
     const handleDelete = async(reviewId) =>{
         try{
-            const id={
-                data:reviewId
-            };
+           
             // console.log("12345",reviewId);
             let data = await axios.delete("/review/crud/"+id, { data: { "id": reviewId } });
             console.log(data.config.data);
             const reviews = await axios.get("/review/" + id);
-            setarr(reviews.data.reviews);
-            alert(data);
+            console.log(reviews);
+            setarr(reviews.data.data);
+            alert("review deleted");
         }
         catch(err){
             alert(err);

@@ -6,15 +6,18 @@ import axios from 'axios';
 function Profile() {
 
     // const { user } = useAuth();
-    const [user,setUser] = useState()
+    const [user,setUser] = useState(JSON.parse(localStorage.getItem("user")).data);
     useEffect(async ()=>{
-        setUser(JSON.parse(localStorage.getItem("user")));
-        console.log(user);
-        nameSet(user.data.name)
-        passwordSet(user.data.password)
-        emailSet(user.data.email)
-        passwordCnfSet(user.data.password)
-        console.log(user)
+        // let users=localStorage.getItem("user")
+        // setUser(JSON.parse(users));
+        // console.log(users);
+        // setUser();
+        // console.log(user);
+        nameSet(user.name)
+        passwordSet(user.password)
+        emailSet(user.email)
+        passwordCnfSet(user.password)
+        console.log("abcd",user)
     },[]);
     // console.log("typeof user is ",(user));
     const [password, passwordSet] = useState()
@@ -26,15 +29,17 @@ function Profile() {
     }
     const handleClick = async () => {
         try {
-            console.log(user.data._id);
-            const data = await axios.patch("/user/" + user.data._id, {
+            console.log(user._id);
+            const data = await axios.patch("/user/" + user._id, {
                email,
                 name,
                 password,
                 confirmPassword: passwordCnf,
-                role: user.data.role,
-                _id:user.data._id
+                role: user.role,
+                _id:user._id
             });
+            console.log(data.data.data);
+            localStorage.setItem("user", JSON.stringify(data.data.data));
         } catch (error) {
             console.log(error);
         }
