@@ -9,7 +9,8 @@ function Review() {
     useEffect(async () => {
         try {
             const data = await axios.get("/review/top3");
-            setarr(data.data.reviews);
+            console.log(data);
+            setarr(data.data.data);
             // console.log(data.data.length);
         } catch (err) {
             console.log(err);
@@ -32,7 +33,7 @@ function Review() {
                                     <img alt='' src={ele.user.profileImage} className='img' />
                                 </div>
                                 <div className='rheader'>
-                                    <h3 className="rh3">ele.user.name</h3>
+                                    <h3 className="rh3">{ele.user.name}</h3>
                                 </div>
                                 <div className='rsummary'>
                                     <p className='para'>

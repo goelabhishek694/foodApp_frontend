@@ -20,9 +20,11 @@ function PlanDetail() {
         delete data.data.data["_id"]
         delete data.data.data["__v"]
         setplan(data.data.data)
-        const reviews = await axios.get(`/review/${id}/`);
-        setarr(reviews.data.reviews)
-        console.log(arr);
+        const reviews = await axios.get("/review/"+id);
+        // console.log(reviews);
+        console.log(reviews.data.data);
+        setarr(reviews.data.data)
+        // console.log(arr);
     }, [])
 
     function capitalizeFirstLetter(string) {
@@ -43,11 +45,16 @@ function PlanDetail() {
         console.log(reviews);
         setarr(reviews.data.reviews);
     }
-    const handleDelete = async() =>{
+    const handleDelete = async(reviewId) =>{
         try{
-            let data = await axios.delete("/", {
-                "id": id
-            });
+            const id={
+                data:reviewId
+            };
+            // console.log("12345",reviewId);
+            let data = await axios.delete("/review/crud/"+id, { data: { "id": reviewId } });
+            console.log(data.config.data);
+            const reviews = await axios.get("/review/" + id);
+            setarr(reviews.data.reviews);
             alert(data);
         }
         catch(err){
@@ -108,7 +115,7 @@ function PlanDetail() {
                             </div>
 
                             <div className='rcBtn'>
-                                <button className="showMoreBtn btn" onClick={handleDelete}>Delete</button>
+                                <button className="showMoreBtn btn" onClick={()=>{handleDelete(ele._id)}}>Delete</button>
                             </div>
                         </div>
                     ))

@@ -18,7 +18,7 @@ Login() {
         try {
             // console.log(email,password)
             await login(email, password)
-            // history.push("/")
+            history.push("/")
           } catch(err) {
             console.log(err);
           }
