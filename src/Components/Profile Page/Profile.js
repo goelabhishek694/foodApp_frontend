@@ -52,7 +52,7 @@ function Profile() {
                     <h1 className='h1'>Profile</h1>
                     <div className="line"></div>
                     <div className="profileImage">
-                        {/* <img src={user.user.profileImage} /> */}
+                        {/* {<img src={user.user.profileImage} /> } */}
                     </div>
                 </div>
                 <div className="loginBox">
